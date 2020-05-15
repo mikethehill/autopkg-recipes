@@ -16,7 +16,7 @@
     <key>MinimumVersion</key>
     <string>0.6.1</string>
     <key>ParentRecipe</key>
-    <string>com.github.mikethehill.download.gam</string>
+    <string>com.github.mikethehill.download.gamadv-xtd3</string>
     <key>Process</key>
     <array>
         <dict>
