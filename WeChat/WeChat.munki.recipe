@@ -35,7 +35,7 @@
 	<key>MinimumVersion</key>
 	<string>0.2.9</string>
 	<key>ParentRecipe</key>
-	<string>com.github.mikethehill.download.recipe</string>
+	<string>com.github.mikethehill.download.wechat</string>
 	<key>Process</key>
 	<array>
 		<dict>
