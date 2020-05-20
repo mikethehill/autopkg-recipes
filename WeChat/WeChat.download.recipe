@@ -11,9 +11,7 @@
 		<key>NAME</key>
 		<string>WeChat</string>
 		<key>DOWNLOAD_URL</key>
-		<string>https://dldir1.qq.com/weixin/mac/</string>
-		<key>SEARCH_PATTERN</key>
-		<string>[^"]+\.dmg[^"]*</string>
+		<string>https://dldir1.qq.com/weixin/mac/WeChatMac.dmg</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>0.2.9</string>
@@ -21,22 +19,11 @@
 	<array>
 		<dict>
 			<key>Processor</key>
-			<string>URLTextSearcher</string>
-			<key>Arguments</key>
-			<dict>
-				<key>url</key>
-				<string>%DOWNLOAD_URL%</string>
-				<key>re_pattern</key>
-				<string>%SEARCH_PATTERN%</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Processor</key>
 			<string>URLDownloader</string>
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
-				<string>%match%</string>
+				<string>%DOWNLOAD_URL%</string>
 			</dict>
 		</dict>
 		<dict>
