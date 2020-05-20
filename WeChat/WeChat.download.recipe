@@ -11,7 +11,7 @@
 		<key>NAME</key>
 		<string>WeChat</string>
 		<key>DOWNLOAD_URL</key>
-		<string>https://dldir1.qq.com/weixin/mac/</string>
+		<string>https://dldir1.qq.com/weixin/mac/WeChatMac.dmg</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>0.2.9</string>
@@ -24,8 +24,6 @@
 			<dict>
 				<key>url</key>
 				<string>%DOWNLOAD_URL%</string>
-				<key>filename</key>
-				<string>WeChatMac.dmg</string>
 			</dict>
 		</dict>
 		<dict>
