@@ -12,7 +12,6 @@
 		<string>WeChat</string>
 		<key>DOWNLOAD_URL</key>
 		<string>https://dldir1.qq.com/weixin/mac/</string>
-		<key></key>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>0.2.9</string>
