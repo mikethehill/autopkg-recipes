@@ -40,7 +40,6 @@
     <string>com.github.mikethehill.pkg.ooklaspeedtestcli</string>
     <key>Process</key>
     <array>
-        </dict>
         <dict>
             <key>Arguments</key>
             <dict>
