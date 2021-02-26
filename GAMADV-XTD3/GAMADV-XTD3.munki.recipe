@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>Description</key>
-    <string>Downloads the latest release copy of GAMADV-XTD3 (Google Admin command line manager) from Github, creates a package, and imports it into a munki_repo. Available major macOS versions can be found at https://github.com/taers232c/GAMADV-XTD3/releases/latest.</string>
+    <string>Downloads the latest release copy of GAMADV-XTD3 (Google Admin command line manager) from Github, creates a package, and imports it into a munki_repo</string>
     <key>Identifier</key>
     <string>com.github.mikethehill.munki.gamadv-xtd3</string>
     <key>Input</key>
@@ -14,8 +14,6 @@
         <string>tools/GAMADV-XTD3</string>
         <key>NAME</key>
         <string>GAMADV_XTD3</string>
-        <key>OS_MAJOR_VERSION</key>
-        <string>15</string>
         <key>pkginfo</key>
         <dict>
             <key>catalogs</key>
@@ -25,7 +23,7 @@
             <key>category</key>
             <string>%MUNKI_CATEGORY%</string>
             <key>description</key>
-            <string>GAMADV-XTD3 is a free, open source command line tool for Google G Suite Administrators to manage domain and user settings quickly and easily.</string>
+            <string>GAMADV-XTD3 is a free, open source command line tool for Google Workspace Administrators to manage domain and user settings quickly and easily.</string>
             <key>developer</key>
             <string>Ross Scroggs</string>
             <key>display_name</key>
@@ -50,7 +48,7 @@
                 <key>additional_pkginfo</key>
                 <dict>
                     <key>minimum_os_version</key>
-                    <string>%min_os_vers%</string>
+                    <string>10.10</string>
                 </dict>
             </dict>
             <key>Processor</key>
