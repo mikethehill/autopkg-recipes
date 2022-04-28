@@ -7,7 +7,7 @@
 	<key>Description</key>
 	<string>Downloads the latest version of Telegram and imports it into Munki.</string>
 	<key>Identifier</key>
-	<string>uk.co.techahoy.munki.Telegram</string>
+	<string>com.techahoy.munki.Telegram</string>
 	<key>Input</key>
 	<dict>
 		<key>MUNKI_REPO_SUBDIR</key>
@@ -21,11 +21,13 @@
 				<string>testing</string>
 			</array>
 			<key>description</key>
-			<string>Messenger based on the MTP protocol.</string>
+			<string>A new era of messaging</string>
 			<key>developer</key>
 			<string>TELEGRAM MESSENGER LLP</string>
 			<key>display_name</key>
 			<string>Telegram</string>
+			<key>category</key>
+			<string>Communication</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>unattended_install</key>
@@ -35,7 +37,7 @@
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
 	<key>ParentRecipe</key>
-	<string>uk.co.techahoy.download.Telegram</string>
+	<string>com.techahoy.download.Telegram</string>
 	<key>Process</key>
 	<array>
 		<dict>
