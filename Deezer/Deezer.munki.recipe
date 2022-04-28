@@ -22,6 +22,8 @@
 			</array>
 			<key>description</key>
 			<string>Get the most effortless audio entertainment for you. Only on Deezer.</string>
+			<key>category</key>
+            <string>Music</string>
 			<key>developer</key>
 			<string>DEEZER SA</string>
 			<key>display_name</key>
