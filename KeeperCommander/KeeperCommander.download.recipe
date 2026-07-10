@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Downloads the latest macOS build of Keeper Commander from its GitHub releases page. Defaults to the Apple Silicon (arm64) installer; set the ARCH input to "x86_64" for Intel Macs.</string>
+	<key>Identifier</key>
+	<string>com.github.techahoy-recipes.download.KeeperCommander</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>KeeperCommander</string>
+		<key>ARCH</key>
+		<string>arm64</string>
+		<key>GITHUB_REPO</key>
+		<string>Keeper-Security/Commander</string>
+	</dict>
+	<key>MinimumVersion</key>
+	<string>1.0.0</string>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Processor</key>
+			<string>GitHubReleasesInfoProvider</string>
+			<key>Arguments</key>
+			<dict>
+				<key>github_repo</key>
+				<string>%GITHUB_REPO%</string>
+				<key>asset_regex</key>
+				<string>^keeper-commander-mac-%ARCH%-v.*\.pkg$</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
+			<key>Arguments</key>
+			<dict>
+				<key>filename</key>
+				<string>%NAME%-%version%.pkg</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>EndOfCheckPhase</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>CodeSignatureVerifier</string>
+			<key>Arguments</key>
+			<dict>
+				<key>input_path</key>
+				<string>%pathname%</string>
+				<key>requirement</key>
+				<string>anchor apple generic and certificate leaf[subject.OU] = "234QNB7GCA"</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
