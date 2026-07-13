@@ -5,9 +5,9 @@
 	<key>Description</key>
 	<string>Downloads the latest macOS build of Keeper Commander and imports it into a Munki repo.</string>
 	<key>Identifier</key>
-	<string>com.github.techahoy-recipes.munki.KeeperCommander</string>
+	<string>com.github.techahoy.munki.KeeperCommander</string>
 	<key>ParentRecipe</key>
-	<string>com.github.techahoy-recipes.download.KeeperCommander</string>
+	<string>com.github.techahoy.download.KeeperCommander</string>
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
 	<key>Input</key>
@@ -18,9 +18,46 @@
 		<string>arm64</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps/KeeperCommander</string>
+		<key>pkginfo</key>
+		<dict>
+			<key>name</key>
+			<string>%NAME%</string>
+			<key>display_name</key>
+			<string>Keeper Commander</string>
+			<key>description</key>
+			<string>Keeper Commander is a command-line and SDK interface to Keeper Password Manager, used for automation, secrets management and administration.</string>
+			<key>developer</key>
+			<string>Keeper Security, Inc.</string>
+			<key>category</key>
+			<string>Utilities</string>
+			<key>unattended_install</key>
+			<true/>
+			<key>minimum_os_version</key>
+			<string>11.0</string>
+			<key>supported_architectures</key>
+			<array>
+				<string>%ARCH%</string>
+			</array>
+			<key>catalogs</key>
+			<array>
+				<string>testing</string>
+			</array>
+		</dict>
 	</dict>
 	<key>Process</key>
 	<array>
+		<dict>
+			<key>Processor</key>
+			<string>MunkiPkginfoMerger</string>
+			<key>Arguments</key>
+			<dict>
+				<key>additional_pkginfo</key>
+				<dict>
+					<key>version</key>
+					<string>%version%</string>
+				</dict>
+			</dict>
+		</dict>
 		<dict>
 			<key>Processor</key>
 			<string>MunkiImporter</string>
@@ -30,33 +67,6 @@
 				<string>%pathname%</string>
 				<key>repo_subdirectory</key>
 				<string>%MUNKI_REPO_SUBDIR%</string>
-				<key>pkginfo</key>
-				<dict>
-					<key>name</key>
-					<string>%NAME%</string>
-					<key>version</key>
-					<string>%version%</string>
-					<key>display_name</key>
-					<string>Keeper Commander</string>
-					<key>description</key>
-					<string>Keeper Commander is a command-line and SDK interface to Keeper Password Manager, used for automation, secrets management and administration.</string>
-					<key>developer</key>
-					<string>Keeper Security, Inc.</string>
-					<key>category</key>
-					<string>Utilities</string>
-					<key>unattended_install</key>
-					<true/>
-					<key>minimum_os_version</key>
-					<string>11.0</string>
-					<key>supported_architectures</key>
-					<array>
-						<string>%ARCH%</string>
-					</array>
-					<key>catalogs</key>
-					<array>
-						<string>testing</string>
-					</array>
-				</dict>
 			</dict>
 		</dict>
 	</array>
