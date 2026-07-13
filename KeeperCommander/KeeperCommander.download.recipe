@@ -5,7 +5,7 @@
 	<key>Description</key>
 	<string>Downloads the latest macOS build of Keeper Commander from its GitHub releases page. Defaults to the Apple Silicon (arm64) installer; set the ARCH input to "x86_64" for Intel Macs.</string>
 	<key>Identifier</key>
-	<string>com.github.techahoy-recipes.download.KeeperCommander</string>
+	<string>com.github.techahoy.download.KeeperCommander</string>
 	<key>Input</key>
 	<dict>
 		<key>NAME</key>
