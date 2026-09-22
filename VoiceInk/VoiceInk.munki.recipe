@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Description</key>
+    <string>Downloads the latest version of VoiceInk and imports it into Munki.</string>
+    <key>Identifier</key>
+    <string>com.github.techahoy.munki.VoiceInk</string>
+    <key>ParentRecipe</key>
+    <string>com.github.techahoy.download.VoiceInk</string>
+    <key>MinimumVersion</key>
+    <string>2.3</string>
+    <key>Input</key>
+    <dict>
+        <key>NAME</key>
+        <string>VoiceInk</string>
+        <key>MUNKI_REPO_SUBDIR</key>
+        <string>apps/VoiceInk</string>
+        <key>pkginfo</key>
+        <dict>
+            <key>catalogs</key>
+            <array>
+                <string>testing</string>
+            </array>
+            <key>description</key>
+            <string>Open-source voice dictation app for macOS. No subscription required.</string>
+            <key>display_name</key>
+            <string>VoiceInk</string>
+            <key>name</key>
+            <string>%NAME%</string>
+            <key>developer</key>
+            <string>Prakash Joshi</string>
+            <key>unattended_install</key>
+            <true/>
+            <key>unattended_uninstall</key>
+            <true/>
+            <key>minimum_os_version</key>
+            <string>14.4</string>
+        </dict>
+    </dict>
+    <key>Process</key>
+    <array>
+        <dict>
+            <key>Processor</key>
+            <string>MunkiImporter</string>
+            <key>Arguments</key>
+            <dict>
+                <key>pkg_path</key>
+                <string>%pathname%</string>
+                <key>repo_subdirectory</key>
+                <string>%MUNKI_REPO_SUBDIR%</string>
+            </dict>
+        </dict>
+    </array>
+</dict>
+</plist>
