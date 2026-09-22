@@ -42,12 +42,8 @@
             <dict>
                 <key>input_path</key>
                 <string>%pathname%/VoiceInk.app</string>
-                <key>expected_authority_names</key>
-                <array>
-                    <string>Developer ID Application: Prakash Joshi (V6J6A3VWY2)</string>
-                    <string>Developer ID Certification Authority</string>
-                    <string>Apple Root CA</string>
-                </array>
+                <key>requirement</key>
+                <string>identifier "com.prakashjoshipax.VoiceInk" and anchor apple generic and certificate leaf[subject.OU] = "V6J6A3VWY2"</string>
             </dict>
         </dict>
         <dict>
