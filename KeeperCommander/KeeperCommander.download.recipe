@@ -50,8 +50,12 @@
 			<dict>
 				<key>input_path</key>
 				<string>%pathname%</string>
-				<key>requirement</key>
-				<string>anchor apple generic and certificate leaf[subject.OU] = "234QNB7GCA"</string>
+				<key>expected_authority_names</key>
+				<array>
+					<string>Developer ID Installer: Callpod Inc. (234QNB7GCA)</string>
+					<string>Developer ID Certification Authority</string>
+					<string>Apple Root CA</string>
+				</array>
 			</dict>
 		</dict>
 	</array>
