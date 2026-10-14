@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Downloads the latest WiFiman Desktop and imports it into Munki.
+
+Run one override per architecture:
+  Apple silicon: ARCH = arm64, SUPPORTED_ARCH = arm64
+  Intel:         ARCH = amd64, SUPPORTED_ARCH = x86_64
+Both pkginfos share the same name and Munki picks the right one by supported_architectures.
+
+The vendor packages register receipts with version "0" and a postinstall moves the app from /Applications/WiFiman to /Applications, so detection relies on the installs array, not receipts.</string>
+	<key>Identifier</key>
+	<string>com.github.techahoy.munki.WiFimanDesktop</string>
+	<key>ParentRecipe</key>
+	<string>com.github.techahoy.download.WiFimanDesktop</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>WiFimanDesktop</string>
+		<key>ARCH</key>
+		<string>arm64</string>
+		<key>SUPPORTED_ARCH</key>
+		<string>arm64</string>
+		<key>MUNKI_REPO_SUBDIR</key>
+		<string>apps/WiFiman</string>
+		<key>pkginfo</key>
+		<dict>
+			<key>catalogs</key>
+			<array>
+				<string>testing</string>
+			</array>
+			<key>category</key>
+			<string>Utilities</string>
+			<key>description</key>
+			<string>WiFiman Desktop from Ubiquiti: Wi-Fi and network scanning, speed tests and Teleport VPN access to UniFi networks.</string>
+			<key>developer</key>
+			<string>Ubiquiti Inc.</string>
+			<key>display_name</key>
+			<string>WiFiman Desktop</string>
+			<key>name</key>
+			<string>%NAME%</string>
+			<key>supported_architectures</key>
+			<array>
+				<string>%SUPPORTED_ARCH%</string>
+			</array>
+			<key>blocking_applications</key>
+			<array>
+				<string>WiFiman Desktop</string>
+			</array>
+			<key>unattended_install</key>
+			<true/>
+			<key>unattended_uninstall</key>
+			<false/>
+			<key>uninstallable</key>
+			<true/>
+			<key>uninstall_method</key>
+			<string>uninstall_script</string>
+			<key>uninstall_script</key>
+			<string>#!/bin/sh
+# Remove WiFiman Desktop, its companion helper and the root LaunchDaemon.
+SERVICE_DIR="/Library/Application Support/WiFiman"
+APP="/Applications/WiFiman Desktop.app"
+
+/usr/bin/pkill -x "WiFiman Desktop" 2&gt;/dev/null
+
+if [ -x "$SERVICE_DIR/wifiman-desktopd" ]; then
+    "$SERVICE_DIR/wifiman-desktopd" stop 2&gt;/dev/null
+    "$SERVICE_DIR/wifiman-desktopd" uninstall 2&gt;/dev/null
+fi
+/bin/launchctl bootout system/wifiman-desktop 2&gt;/dev/null
+/bin/rm -f /Library/LaunchDaemons/wifiman-desktop.plist
+
+/bin/rm -rf "$APP" "$SERVICE_DIR" "/Applications/WiFiman"
+
+/usr/sbin/pkgutil --forget ui.wifiman.com 2&gt;/dev/null
+/usr/sbin/pkgutil --forget ui.wifiman.network.helper.WiFimanNetworkHelper 2&gt;/dev/null
+exit 0
+</string>
+		</dict>
+	</dict>
+	<key>MinimumVersion</key>
+	<string>2.3</string>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Processor</key>
+			<string>MunkiPkginfoMerger</string>
+			<key>Arguments</key>
+			<dict>
+				<key>additional_pkginfo</key>
+				<dict>
+					<key>version</key>
+					<string>%version%</string>
+					<key>installs</key>
+					<array>
+						<dict>
+							<key>type</key>
+							<string>application</string>
+							<key>path</key>
+							<string>/Applications/WiFiman Desktop.app</string>
+							<key>CFBundleIdentifier</key>
+							<string>ui.wifiman.desktop</string>
+							<key>CFBundleName</key>
+							<string>WiFiman Desktop</string>
+							<key>CFBundleShortVersionString</key>
+							<string>%version%</string>
+							<key>version_comparison_key</key>
+							<string>CFBundleShortVersionString</string>
+						</dict>
+					</array>
+				</dict>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>MunkiImporter</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pkg_path</key>
+				<string>%pathname%</string>
+				<key>repo_subdirectory</key>
+				<string>%MUNKI_REPO_SUBDIR%</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
