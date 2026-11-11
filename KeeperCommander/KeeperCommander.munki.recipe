@@ -3,7 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads the latest macOS build of Keeper Commander and imports it into a Munki repo.</string>
+	<string>Downloads the latest macOS build of Keeper Commander and imports it into a Munki repo.
+ 
+The vendor pkg's receipts carry fixed versions (binary 0, launcher 0.1.9) that never change between releases, so Munki cannot tell versions apart from receipts. This recipe unpacks the launcher component's payload during the run and builds an installs array from Keeper Commander.app with MunkiInstallsItemsCreator, so Munki compares the app's CFBundleShortVersionString.</string>
 	<key>Identifier</key>
 	<string>com.github.techahoy.munki.KeeperCommander</string>
 	<key>ParentRecipe</key>
@@ -18,6 +20,12 @@
 		<string>arm64</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps/KeeperCommander</string>
+		<key>LAUNCHER_COMPONENT_PKG</key>
+		<string>keeper-commander-launcher.pkg</string>
+		<key>LAUNCHER_INSTALL_LOCATION</key>
+		<string>/Applications</string>
+		<key>APP_PATH</key>
+		<string>/Applications/Keeper Commander.app</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>name</key>
@@ -48,6 +56,52 @@
 	<array>
 		<dict>
 			<key>Processor</key>
+			<string>FlatPkgUnpacker</string>
+			<key>Arguments</key>
+			<dict>
+				<key>flat_pkg_path</key>
+				<string>%pathname%</string>
+				<key>destination_path</key>
+				<string>%RECIPE_CACHE_DIR%/unpack</string>
+				<key>purge_destination</key>
+				<true/>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>PkgPayloadUnpacker</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pkg_payload_path</key>
+				<string>%RECIPE_CACHE_DIR%/unpack/%LAUNCHER_COMPONENT_PKG%/Payload</string>
+				<key>destination_path</key>
+				<string>%RECIPE_CACHE_DIR%/payload%LAUNCHER_INSTALL_LOCATION%</string>
+				<key>purge_destination</key>
+				<true/>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>MunkiInstallsItemsCreator</string>
+			<key>Arguments</key>
+			<dict>
+				<key>faux_root</key>
+				<string>%RECIPE_CACHE_DIR%/payload</string>
+				<key>installs_item_paths</key>
+				<array>
+					<string>%APP_PATH%</string>
+				</array>
+				<key>version_comparison_key</key>
+				<string>CFBundleShortVersionString</string>
+			</dict>
+		</dict>
+		<dict>
+			<!-- No arguments: merges the installs array MunkiInstallsItemsCreator produced. -->
+			<key>Processor</key>
+			<string>MunkiPkginfoMerger</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
 			<string>MunkiPkginfoMerger</string>
 			<key>Arguments</key>
 			<dict>
@@ -67,6 +121,18 @@
 				<string>%pathname%</string>
 				<key>repo_subdirectory</key>
 				<string>%MUNKI_REPO_SUBDIR%</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>PathDeleter</string>
+			<key>Arguments</key>
+			<dict>
+				<key>path_list</key>
+				<array>
+					<string>%RECIPE_CACHE_DIR%/unpack</string>
+					<string>%RECIPE_CACHE_DIR%/payload</string>
+				</array>
 			</dict>
 		</dict>
 	</array>
