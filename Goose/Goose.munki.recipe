@@ -5,11 +5,11 @@
 	<key>Description</key>
 	<string>Downloads the latest Goose desktop release, wraps the app in a disk image and imports it into a Munki repo.
 
-The parent recipe defaults ARCH to '_intel_mac', so this recipe overrides it to an empty string to fetch the Apple Silicon build (Goose.zip). To import the Intel build instead, set ARCH to '_intel_mac' and SUPPORTED_ARCH to 'x86_64' in an override.</string>
+ARCH defaults to an empty string, which fetches the Apple Silicon build (Goose.zip). To import the Intel build instead, set ARCH to '_intel_mac' and SUPPORTED_ARCH to 'x86_64' in an override.</string>
 	<key>Identifier</key>
 	<string>com.github.techahoy.munki.Goose</string>
 	<key>ParentRecipe</key>
-	<string>com.github.almenscorner.download.Goose</string>
+	<string>com.github.techahoy.download.Goose</string>
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
 	<key>Input</key>
