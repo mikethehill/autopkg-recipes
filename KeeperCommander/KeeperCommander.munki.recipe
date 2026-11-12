@@ -109,6 +109,15 @@ The vendor pkg's receipts carry fixed versions (binary 0, launcher 0.1.9) that n
 				<dict>
 					<key>version</key>
 					<string>%version%</string>
+					<key>preinstall_script</key>
+					<string>#!/bin/sh
+# The vendor's launcher app bundle version has gone backwards between
+# releases (17.2.10 = 0.2.10, 18.1.9 = 0.1.9), so PackageKit skips the
+# launcher component as a downgrade. Remove the existing app first so
+# the new one is always laid down.
+/bin/rm -rf "%APP_PATH%"
+exit 0
+</string>
 				</dict>
 			</dict>
 		</dict>
